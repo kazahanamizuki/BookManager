@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>書籍管理システム</title>
+</head>
+
+<body>
+    <h1>出版社一覧</h1>
+    <div>
+        <a href="#" th:href="@{/book/list}" method="get">書籍一覧</a>
+    </div>
+    <div>
+        <a href="#" th:href="@{/book/author/list}" method="get">著者一覧</a>
+    </div>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>編集</th>
+                <th>ID</th>
+                <th>出版社名</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="publisher : ${publishers}">
+                <td><a href="#" th:href="@{/book/publisher/edit/} + ${publisher.publisherId}">編集</a></td>
+                <td th:text="${publisher.publisherId}"></td>
+                <td th:text="${publisher.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div>
+        <a href="#" th:href="@{/book/publisher/register}" method="get">出版社登録</a>
+    </div>
+</body>
+
+</html>

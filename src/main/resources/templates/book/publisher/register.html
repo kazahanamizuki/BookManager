@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>書籍管理システム</title>
+</head>
+
+<body>
+    <h1>出版社登録</h1>
+    <form th:action="@{/book/publisher/register}" th:object="${publisherInfo}" method="post">
+        <div>
+            <label for="publisherId">ID:</label>
+            <input type="number" id="publisherId" name="publisherId" th:value="*{publisherId}" required>
+        </div>
+        <div>
+            <label for="name">出版社名:</label>
+            <input type="text" id="name" name="name" th:value="*{name}" required>
+        </div>
+        <div>
+            <button type="submit" name="register">登録</button>
+        </div>
+    </form>
+</body>
+
+</html>

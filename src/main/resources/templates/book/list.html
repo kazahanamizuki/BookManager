@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>書籍管理システム</title>
+</head>
+
+<body>
+    <h1>書籍一覧</h1>
+    <div>
+        <a href="#" th:href="@{/book/author/list}" method="get">著者一覧</a>
+    </div>
+    <div>
+        <a href="#" th:href="@{/book/publisher/list}" method="get">出版社一覧</a>
+    </div>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>編集</th>
+                <th>ISBNコード</th>
+                <th>書名</th>
+                <th>著者</th>
+                <th>出版社</th>
+                <th>定価</th>
+                <th>出版日</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${books}">
+                <td><a href="#" th:href="@{/book/edit/} + ${book.isbn}">編集</a></td>
+                <td th:text="${book.isbn}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:if="${authorMap.containsKey(book.authorId)}" th:text="${authorMap.get(book.authorId)}"></td>
+                <td th:if="${!authorMap.containsKey(book.authorId)}">不明</td>
+                <td th:if="${publisherMap.containsKey(book.publisherId)}" th:text="${publisherMap.get(book.publisherId)}"></td>
+                <td th:if="${!publisherMap.containsKey(book.publisherId)}">不明</td>
+                <td th:text="${book.price()}"></td>
+                <td th:text="${book.dateOfPublication}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <div>
+        <a href="#" th:href="@{/book/register}" method="get">書籍登録</a>
+    </div>
+</body>
+
+</html>

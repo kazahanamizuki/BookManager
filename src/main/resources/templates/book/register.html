@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>書籍管理システム</title>
+</head>
+
+<body>
+    <h1>書籍登録</h1>
+    <form th:action="@{/book/register}" th:object="${bookInfo}" method="post">
+        <div>
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" name="isbn" th:value="*{isbn}" required>
+        </div>
+        <div>
+            <label for="janCode1">JANコード1:</label>
+            <input type="number" id="janCode1" name="janCode1" th:value="*{janCode1}" required>
+        </div>
+        <div>
+            <label for="janCode2">JANコード2:</label>
+            <input type="number" id="janCode2" name="janCode2" th:value="*{janCode2}" required>
+        </div>
+        <div>
+            <label for="title">書名:</label>
+            <input type="text" id="title" name="title" th:value="*{title}" required>
+        </div>
+        <div>
+            <label for="author">作者:</label>
+            <select id="author" name="author" th:field="*{authorId}">
+                <option th:value=0 th:text="不明" selected></option>
+                <option value="" th:each="author : ${authors}" th:value="${author.authorId}" th:text="${author.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="publisher">出版社:</label>
+            <select id="publisher" name="publisher" th:field="*{publisherId}">
+                <option th:value=0 th:text="不明" selected></option>
+                <option value="" th:each="publisher : ${publishers}" th:value="${publisher.publisherId}" th:text="${publisher.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="dateOfPublication">出版日:</label>
+            <input type="date" id="dateOfPublication" name="dateOfPublication" th:value="*{dateOfPublication}" required>
+        </div>
+        <div>
+            <button type="submit" name="register">登録</button>
+        </div>
+    </form>
+</body>
+
+</html>

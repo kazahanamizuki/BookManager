@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      TZ: "UTC"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-db:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+
+  myadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    depends_on:
+      - mysql
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      UPLOAD_LIMIT: 3000M
+      ExecTimeLimit: 36000
+
+volumes:
+  mysql-db:
